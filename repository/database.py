@@ -15,10 +15,3 @@ def init_schema(connection):
         cursor = connection.cursor()
         cursor.executescript(file.read())
         connection.commit()
-
-def run_seed(connection):
-    seed_path = Path(__file__).parent / "seed.sql"
-    with open(seed_path, "r") as file:
-        cursor = connection.cursor()
-        cursor.executescript(file.read())
-        connection.commit()
