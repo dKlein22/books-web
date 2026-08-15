@@ -25,10 +25,10 @@ def close_db(exception):
     if connection is not None:
         connection.close()
 
-with app.app_context()?
+with app.app_context():
     init_schema(get_db())
 
-if name == "__main__":
+if __name__ == "__main__":
     app.run(deug=True)
 
 
