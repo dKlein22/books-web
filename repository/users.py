@@ -5,6 +5,7 @@ def create_user(connection, name, email, password_hash):
         (name, email, password_hash)
     )
     connection.commit()
+    return cursor.lastrowid
 
 def get_user_email(connection, email):
     cursor = connection.cursor()
