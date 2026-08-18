@@ -1,4 +1,5 @@
 import sqlite3
+from flask import g
 from pathlib import Path
 
 def get_connection():
@@ -15,3 +16,13 @@ def init_schema(connection):
         cursor = connection.cursor()
         cursor.executescript(file.read())
         connection.commit()
+
+def get_db():
+    if "connection" not in g:
+        g.connection = get_connection()
+    return g.connection
+
+def close_db(exception):
+    connection = g.pop("connection", None)
+    if connection is not None:
+        connection.close()

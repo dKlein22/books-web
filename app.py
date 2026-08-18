@@ -1,8 +1,9 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask, g, render_template, request, session
+from flask import Flask
 from flask_session import Session
-from repository.database import  get_connection, init_schema
+from repository.database import init_schema, get_db, close_db
+from routes.auth import auth_bp
 
 load_dotenv()
 
@@ -14,19 +15,12 @@ app.config["SESSION_TYPE"] = "filesystem"
 
 Session(app)
 
-def get_db():
-    if "connection" not in g:
-        g.connection = get_connection()
-    return g.connection
-
-@app.teardown_appcontext
-def close_db(exception):
-    connection = g.pop("connection", None)
-    if connection is not None:
-        connection.close()
+app.teardown_appcontext(close_db)
 
 with app.app_context():
     init_schema(get_db())
+
+app.register_blueprint(auth_bp)
 
 if __name__ == "__main__":
     app.run(debug=os.environ.get("FLASK_DEBUG") == "true")
