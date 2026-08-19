@@ -18,5 +18,7 @@
         <input autocomplete="off" name="password" placeholder="Password" type="password">
         <button type="submit">Login</button>
     </form>
+
+    <a href="{{ url_for('auth.register') }}">Don't have an account? Register</a>
     
 {% endblock %}
