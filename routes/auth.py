@@ -37,7 +37,7 @@ def register():
         user_id = create_user(connection, name, email, password_hash)
         session['user_id'] = user_id
 
-        return redirect("/search")
+        return redirect("/")
 
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
@@ -59,7 +59,7 @@ def login():
         user = get_user_email(connection, email)
         session['user_id'] = user['id']
 
-        return redirect("/search")
+        return redirect("/")
 
 @auth_bp.route("/logout")
 def logout():
