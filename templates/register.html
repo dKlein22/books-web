@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h1>Register</h1>
+
+    {% if errors %}
+        <ul>
+            {% for error in errors %}
+            
+                <li>{{error}}</li>
+            
+            {% endfor %}
+        </ul>
+            
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        <input autocomplete="off" autofocus name="name" placeholder="Name" type="text">
+        <input autocomplete="off"  name="email" placeholder="Email" type="text">
+        <input autocomplete="off"  name="password" placeholder="Password" type="password">
+        <button type="submit">Register</button>
+    </form>
+{% endblock %}
