@@ -1,11 +1,19 @@
 from flask import Blueprint, request, render_template, redirect, session
 from repository.database import get_db
-from repository.users import create_user
+from repository.users import create_user, get_user_email
 from validators.validate_auth import validate_registration, validate_login
 from werkzeug.security import generate_password_hash
 
 auth_bp = Blueprint("auth", __name__)
 
+
+@auth_bp.route("/")
+def home():
+
+    if 'user_id' in session:
+        return redirect("/search")
+
+    return render_template("index.html")
 
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
@@ -48,7 +56,16 @@ def login():
         if errors:
             return render_template("login.html", errors=errors)
 
+        user = get_user_email(connection, email)
+        session['user_id'] = user['id']
+
         return redirect("/search")
+
+@auth_bp.route("/logout")
+def logout():
+
+    session.pop("user_id", None)
+    return redirect("/")
 
         
             
