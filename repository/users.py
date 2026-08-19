@@ -10,4 +10,4 @@ def create_user(connection, name, email, password_hash):
 def get_user_email(connection, email):
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
-    return connection.fetchone()
+    return cursor.fetchone()
