@@ -17,6 +17,13 @@ def init_schema(connection):
         cursor.executescript(file.read())
         connection.commit()
 
+def run_seed(connection):
+    seed_path = Path(__file__).parent / "seed.sql"
+    with open(seed_path, "r") as file:
+        cursor = connection.cursor()
+        cursor.executescript(file.read())
+        connection.commit()
+
 def get_db():
     if "connection" not in g:
         g.connection = get_connection()
