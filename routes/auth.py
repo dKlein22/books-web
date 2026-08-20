@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, session
+from flask import Blueprint, session, request, render_template, redirect, url_for
 from repository.database import get_db
 from repository.users import create_user, get_user_email
 from validators.validate_auth import validate_registration, validate_login

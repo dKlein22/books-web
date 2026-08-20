@@ -4,6 +4,7 @@ from flask import Flask
 from flask_session import Session
 from repository.database import init_schema, get_db, close_db
 from routes.auth import auth_bp
+from routes.books import books_bp
 
 load_dotenv()
 
@@ -21,6 +22,7 @@ with app.app_context():
     init_schema(get_db())
 
 app.register_blueprint(auth_bp)
+app.register_blueprint(books_bp)
 
 if __name__ == "__main__":
     app.run(debug=os.environ.get("FLASK_DEBUG") == "true")
