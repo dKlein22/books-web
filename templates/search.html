@@ -8,4 +8,17 @@
         <button type="submit">Search</button>
     </form>
 
+    <ul>
+        {% for book in results %}
+            <li>
+                {{book['title']}} - {{book['author']}} ({{book['year']}})
+
+                <form action="{{ url_for('books.add_favorite')}}" method="POST">
+                    <input type="hidden" name="book_id" value="{{ book['id'] }}">
+                    <button type="submit">Favorite</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+        
 {% endblock %}
