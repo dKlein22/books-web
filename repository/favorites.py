@@ -20,5 +20,4 @@ def list_favorites(connection, id_user):
 def is_favorite(connection, id_book, id_user):
     cursor = connection.cursor()
     cursor.execute("SELECT 1 FROM favorites WHERE id_book = ? AND id_user = ?", (id_book, id_user))
-    return cursor.fetchone() is not None
-                   
+    return cursor.fetchone() is not None                   

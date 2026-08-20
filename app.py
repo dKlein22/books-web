@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask
 from flask_session import Session
-from repository.database import init_schema, run_seed, get_db, close_db
+from repository.database import init_schema, get_db, close_db
 from routes.auth import auth_bp
 from routes.books import books_bp
 from routes.home import home_bp
@@ -21,8 +21,6 @@ app.teardown_appcontext(close_db)
 
 with app.app_context():
     init_schema(get_db())
-    #Usada para popular o banco de dados
-    #run_seed(get_db())
 
 app.register_blueprint(auth_bp)
 app.register_blueprint(home_bp)
