@@ -1,4 +1,4 @@
-from authorizations.required import login_required
+from authorization.required import login_required
 from flask import Blueprint, request, render_template, redirect, session, url_for
 from repository.books import search_title
 from repository.database import get_db
@@ -18,12 +18,14 @@ def search():
     return render_template("search.html", results=results)
 
 @books_bp.route("/add_favorite", methods=["POST"])
-def add_favorite():
+def add_favorites():
 
     book_id = request.form.get("book_id")
     user_id = session['user_id']
 
-    add_favorite(get_db, book_id, user_id)
+    connection = get_db()
 
-    return redirect(url_for("books.search"))
+    add_favorite(connection, book_id, user_id)
+
+    return redirect(url_for("home.home"))
     

@@ -6,15 +6,6 @@ from werkzeug.security import generate_password_hash
 
 auth_bp = Blueprint("auth", __name__)
 
-
-@auth_bp.route("/")
-def home():
-
-    if 'user_id' in session:
-        return redirect("/search")
-
-    return render_template("index.html")
-
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "GET":
@@ -37,7 +28,7 @@ def register():
         user_id = create_user(connection, name, email, password_hash)
         session['user_id'] = user_id
 
-        return redirect("/")
+        return redirect(url_for("home.home"))
 
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
@@ -59,7 +50,7 @@ def login():
         user = get_user_email(connection, email)
         session['user_id'] = user['id']
 
-        return redirect("/")
+        return redirect(url_for("home.home"))
 
 @auth_bp.route("/logout")
 def logout():
