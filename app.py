@@ -21,7 +21,8 @@ app.teardown_appcontext(close_db)
 
 with app.app_context():
     init_schema(get_db())
-    run_seed(get_db())
+    #Usada para popular o banco de dados
+    #run_seed(get_db())
 
 app.register_blueprint(auth_bp)
 app.register_blueprint(home_bp)
