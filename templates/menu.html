@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <h1>MENU</h1>
+    <a href="{{ url_for('books.search')}}">Search</a>
+    <a href="{{ url_for('books.favorites')}}">Favorites</a>
+
+{% endblock %}
