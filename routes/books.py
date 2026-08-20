@@ -18,9 +18,10 @@ def search():
     return render_template("search.html", results=results)
 
 @books_bp.route("/add_favorite", methods=["POST"])
+@login_required
 def add_favorites():
 
-    book_id = request.form.get("book_id")
+    book_id = int(request.form.get("book_id"))
     user_id = session['user_id']
 
     connection = get_db()
