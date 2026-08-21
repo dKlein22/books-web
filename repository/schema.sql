@@ -21,5 +21,6 @@ CREATE TABLE IF NOT EXISTS favorites (
     id_book INTEGER NOT NULL,
     id_user INTEGER NOT NULL,
     FOREIGN KEY(id_book) REFERENCES books(id),
-    FOREIGN KEY(id_user) REFERENCES users(id)
+    FOREIGN KEY(id_user) REFERENCES users(id),
+    UNIQUE (id_book, id_user)
 );
