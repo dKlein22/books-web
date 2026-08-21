@@ -3,8 +3,15 @@
 {% block body %}
     <h1>SEARCH BOOKS</h1>
 
-    <form method="get">
-        <input autocomplete="off" autofocus name="title" placeholder="Title Book" type="text">
+    <form method="get" action="{{ url_for('books.search') }}">
+        <input name="query" placeholder="Search..." type="text">
+
+        <select name="criteria">
+            <option value="title" {% if criteria == "title" %}selected{% endif %}>Title</option>
+            <option value="genre" {% if criteria == "genre" %}selected{% endif %}>Genre</option>
+            <option value="author" {% if criteria == "author" %}selected{% endif %}>Author</option>
+        </select>
+
         <button type="submit">Search</button>
     </form>
 

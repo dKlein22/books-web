@@ -1,21 +1,30 @@
 from authorization.required import login_required
 from flask import Blueprint, flash, request, render_template, redirect, session, url_for
-from repository.books import search_title
+from repository.books import search_title, search_genre, search_author
 from repository.database import get_db
 from repository.favorites import add_favorite, del_favorite, list_favorites, is_favorite
 
 books_bp = Blueprint("books", __name__)
+search_functions = {
+        "title": search_title,
+        "genre": search_genre,
+        "author": search_author,
+    }
+
 
 @books_bp.route("/search")
 @login_required
 def search():
 
-    title = request.args.get("title")
+    query = request.args.get("query")
+    criteria = request.args.get("criteria")
+
     connection = get_db()
 
-    results = search_title(connection, title) if title else []
+    search_function = search_functions.get(criteria, search_title)
+    results = search_function(connection, query) if query else []
 
-    return render_template("search.html", results=results)
+    return render_template("search.html", results=results, criteria=criteria)
 
 @books_bp.route("/add_favorite", methods=["POST"])
 @login_required
