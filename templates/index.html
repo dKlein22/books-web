@@ -1,7 +1,13 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <h1>Welcome</h1>
-    <a href="{{ url_for('auth.login') }}">Login</a>
-    <a href="{{ url_for('auth.register')}}">Register</a>
+    <div class="d-flex flex-column justify-content-center align-items-center text-center bg-dark text-white" style="min-height: 80vh;">
+        <h1 class="display-4 fw-bold">Your Personal Reading Tracker</h1>
+        <p class="lead mb-4">Search books, save your favorites, and keep track of what you want to read next.</p>
+
+        <div>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-light btn-lg me-2">Login</a>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-outline-light btn-lg">Register</a>
+        </div>
+    </div>
 {% endblock %}
