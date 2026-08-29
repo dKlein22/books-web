@@ -1,0 +1,6 @@
+.menu {
+    min-height: 80vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0,0,0,0.4)), url('/static/img/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
