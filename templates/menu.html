@@ -1,14 +1,16 @@
 {% extends "layout.html" %}
 
+{% block styles %}
+    <link href="{{ url_for('static', filename='css/menu.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
-    <div class="d-flex flex-column justify-content-center align-items-center text-center"
-     style="min-height: 80vh; background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0,0,0,0.6)), url('{{ url_for('static', filename='img/library.jpg') }}'); background-size:cover; background-position:center;">
-    <h1>MENU</h1>
+    <div class="d-flex flex-column justify-content-center align-items-center text-center menu">
+        <h1>MENU</h1>
         <a href="{{ url_for('books.search')}}">Search</a>
         <a href="{{ url_for('books.favorites')}}">Favorites</a>
         <a href="{{ url_for('auth.logout')}}">Logout</a>
 
     </div>
         
-
 {% endblock %}

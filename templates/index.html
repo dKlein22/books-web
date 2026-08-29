@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 
+{% block styles %}
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
-    <div class="d-flex flex-column justify-content-center align-items-center text-center" style="min-height: 80vh;">
+    <div class="d-flex flex-column justify-content-center align-items-center text-center hero-section">
         <h1 class="display-4 fw-bold">Your Personal Reading Tracker</h1>
         <p class="lead mb-4">Search books, save your favorites, and keep track of what you want to read next.</p>
 
