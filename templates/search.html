@@ -1,34 +1,40 @@
 {% extends "layout.html" %}
 
+{% block styles %}
+    <link href="{{ url_for('static', filename='css/search.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
-    <h1>SEARCH BOOKS</h1>
 
-    <form method="get" action="{{ url_for('books.search') }}">
-        <input name="query" placeholder="Search..." type="text">
+    <div class="d-flex flex-column justify-content-center align-items-center search">
+        <h1 class="mb-4">SEARCH BOOKS</h1>
+        <form class="d-flex flex-column align-items-center" method="get" action="{{ url_for('books.search') }}">
+            <input class="form-control mb-3" name="query" placeholder="Search..." type="text">
 
-        <select name="criteria">
-            <option value="title" {% if criteria == "title" %}selected{% endif %}>Title</option>
-            <option value="genre" {% if criteria == "genre" %}selected{% endif %}>Genre</option>
-            <option value="author" {% if criteria == "author" %}selected{% endif %}>Author</option>
-        </select>
+            <select name="criteria" class="form-select mb-3">
+                <option value="title" {% if criteria == "title" %}selected{% endif %}>Title</option>
+                <option value="genre" {% if criteria == "genre" %}selected{% endif %}>Genre</option>
+                <option value="author" {% if criteria == "author" %}selected{% endif %}>Author</option>
+            </select>
 
-        <button type="submit">Search</button>
-    </form>
+            <button class="mb-3 btn btn-outline-light" type="submit">Search</button>
+        </form>
 
-    <ul>
-        {% for book in results %}
-            <li>
-                {{book['title']}} - {{book['author']}} ({{book['year']}})
+        <div class="bg-dark bg-opacity-50 p-4 rounded">
+            <ul>
+                {% for book in results %}
+                    <li>
+                        {{book['title']}} - {{book['author']}} ({{book['year']}})
 
-                <form action="{{ url_for('books.add_favorites')}}" method="post">
-                    <input type="hidden" name="book_id" value="{{ book['id'] }}">
-                    <button type="submit">Favorite</button>
-                </form>
-            </li>
-        {% endfor %}
-    </ul>
+                        <form action="{{ url_for('books.add_favorites')}}" method="post">
+                            <input type="hidden" name="book_id" value="{{ book['id'] }}">
+                            <button class="mb-2 btn btn-outline-success btn-sm" type="submit">Favorite</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
 
-    <a href="{{ url_for('books.favorites')}}">View Favorites</a>
-    <a href="{{ url_for('home.home')}}">Menu</a>
+    </div>
         
 {% endblock %}
