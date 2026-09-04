@@ -21,10 +21,8 @@ Session(app)
 app.teardown_appcontext(close_db)
 
 with app.app_context():
-    init_schema(get_db())
     connection = get_db()
     init_schema(connection)
-
     # Popula o catálogo apenas na primeira execução (banco vazio).
     # Evita duplicar dados a cada restart/deploy, sem precisar comentar/descomentar run_seed() manualmente toda vez.
     if not has_books(connection):
