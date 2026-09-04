@@ -5,6 +5,11 @@ Flask and SQLite. Final project for Harvard's CS50, evolving the earlier
 CLI-based [books-sql](https://github.com/dKlein22/books-sql) into a
 multi-user web app with authentication, sessions, and a styled interface.
 
+**Live demo:** [books-web-hlx1.onrender.com](https://books-web-hlx1.onrender.com)
+*(hosted on Render's free tier — the instance spins down after inactivity,
+so the first request may take up to ~50 seconds to respond. The catalog
+data may reset on redeploy/restart, by design — see Database Design.)*
+
 ---
 
 ## Features
