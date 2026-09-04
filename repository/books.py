@@ -33,3 +33,9 @@ def search_top10(connection):
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM books ORDER BY rating DESC LIMIT 10")
     return cursor.fetchall()
+
+def has_books(connection):
+    cursor = connection.cursor()
+    cursor.execute("SELECT COUNT(*) FROM books")
+    count = cursor.fetchone()[0]
+    return count > 0
